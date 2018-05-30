@@ -13,6 +13,7 @@ import faLock from '@fortawesome/fontawesome-free-solid/faLock';
 import faUser from '@fortawesome/fontawesome-free-solid/faUser';
 
 import ValidatedTextField from '../../components/ValidatedTextField/';
+import LoginConfirmation from '../../components/LoginConfirmation/';
 import '../../styles/css/login.css';
 
 const styles = {
@@ -37,6 +38,7 @@ const styles = {
         backgroundColor: '#FFFFFF',
     },
 };
+// handleChange={this.props.handleEmail}
 
 const Login = props => (
     <div className="login-container">
@@ -74,7 +76,11 @@ const Login = props => (
                 >
                     Enter
                 </Button> */}
-                <Button className={props.classes.button}>
+                <Button
+                    className={props.classes.button}
+                    onClick={props.handleToggleDialogue}
+                    type="submit"
+                >
                     {props.children ? props.children : 'Log In'}
                 </Button>
             </form>
