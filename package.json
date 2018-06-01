@@ -23,9 +23,12 @@
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/styles/sass -o src/styles/css",
-    "watch-css": "npm run build-css && node-sass-chokidar src/styles/sass -o src/styles/css --watch --recursive",
+    "watch-css":
+      "npm run build-css && node-sass-chokidar src/styles/sass -o src/styles/css --watch --recursive",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "json-server": "json-server --watch db.json --port 3004",
+    "dev": "concurrently \"npm run start\" \"npm run json-server\"",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

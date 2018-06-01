@@ -48,7 +48,6 @@ const ValidatedTextField = ({
         <TextField
             autoFocus
             error
-            className={className}
             errorStyle={styles.errorStyle}
             id={type}
             InputProps={{
@@ -78,4 +77,4 @@ ValidatedTextField.propTypes = {
     label: PropTypes.string.isRequired,
 };
 
-export default withStyles(styles)(ValidatedTextField);
+export default ValidatedTextField;

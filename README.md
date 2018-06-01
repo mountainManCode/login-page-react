@@ -7,7 +7,7 @@ A simple login page using React library.
 Download the repo, then run:
 
 ```bash
-yarn install
+npm install
 ```
 
 ## Start-up
@@ -15,7 +15,7 @@ yarn install
 From inside the directory, run:
 
 ```bash
-yarn start
+npm start
 ```
 
 ## Technology Used

@@ -8,28 +8,24 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 
+// import { loginGreeting } from '../../redux/modules/login';
+
 function Transition(props) {
     return <Slide direction="up" {...props} />;
 }
 
-class LoginConfirmation extends React.Component {
+class LoginConfirmation extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            // toggleDialogue: false,
-        };
+        this.state = {};
     }
 
-    //   handleClickOpen = () => {
-    //     this.setState({ open: true });
-    //   };
-
-    // handleClose = () => {
-    //     this.setState({ open: false });
-    // };
+    // componentDidMount() {
+    //     this.props.dispatch(loginGreeting());
+    // }
 
     render() {
-        console.log(this.props.dialogue);
+        // console.log(this.props.dialogue);
         return (
             <div>
                 <Dialog
