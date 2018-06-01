@@ -2,7 +2,7 @@
 const GET_EMAIL = 'GET_EMAIL';
 const GET_PASSWORD = 'GET_PASSWORD';
 
-const GET_PROFILE_LOADING = 'GET_PROFILE_LOADING';
+const GET_LOADING = 'GET_LOADING';
 const GET_PROFILE = 'GET_PROFILE';
 const GET_PROFILE_ERROR = 'GET_PROFILE_ERROR';
 const GET_GREETING = 'GET_GREETING';
@@ -26,8 +26,8 @@ const resetLogin = (email, password) => ({
     password,
 });
 
-const getProfileLoading = () => ({
-    type: GET_PROFILE_LOADING,
+const getLoading = () => ({
+    type: GET_LOADING,
 });
 
 const getProfile = user => ({
@@ -50,7 +50,9 @@ const toggleDialogue = () => ({
 });
 
 // ASYNC ACTION CREATORS
+const MESSAGES_URL = 'http://localhost:3004/messages';
 const USERS_URL = 'http://localhost:3004/users';
+
 
 export const fetchEmail = email => dispatch => {
     dispatch(getEmail(email));
@@ -65,11 +67,21 @@ export const fetchReset = (email, password) => dispatch => {
 };
 
 export const fetchGreeting = () => dispatch => {
-    dispatch(getGreeting());
+    dispatch(getLoading());
+
+    const messages = fetch(MESSAGES_URL).then(r => r.json());
+
+    return Promise.all([messages]).then(response => {
+        const [messagesList] = response;
+        const loginGreeting = messagesList.find(message =>
+            message);
+        const welcome = Object.values(loginGreeting).toString();
+        dispatch(getGreeting(welcome));
+    });
 };
 
 export const fetchUser = (email, password) => dispatch => {
-    dispatch(getProfileLoading());
+    dispatch(getLoading());
     const users = fetch(USERS_URL).then(r => r.json());
 
     return Promise.all([users]).then(response => {
@@ -78,7 +90,7 @@ export const fetchUser = (email, password) => dispatch => {
         const profile = usersList.filter(user =>
             user.email === email && user.password === password);
         dispatch(getProfile(profile));
-        dispatch(toggleDialogue());
+        // if (profile.length > 0) { dispatch(toggleDialogue()); }
     })
         .catch(error => dispatch(getProfileError(error)));
 };
@@ -131,7 +143,7 @@ export default (
             error: '',
         };
     }
-    case GET_PROFILE_LOADING: {
+    case GET_LOADING: {
         return { ...state, isLoading: true, error: '' };
     }
     case GET_PROFILE: {

@@ -8,7 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 
-// import { loginGreeting } from '../../redux/modules/login';
+import { fetchGreeting } from '../../redux/modules/login';
 
 function Transition(props) {
     return <Slide direction="up" {...props} />;
@@ -20,12 +20,16 @@ class LoginConfirmation extends Component {
         this.state = {};
     }
 
-    // componentDidMount() {
-    //     this.props.dispatch(loginGreeting());
-    // }
+    async componentDidMount() {
+        await this.props.dispatch(fetchGreeting());
+    }
 
     render() {
-        // console.log(this.props.dialogue);
+        const { dialogue, greeting, user } = this.props;
+
+        const nameObject = user.find(value => value.fullName);
+        // const userName = Object.values(nameObject).toString();
+        console.log(nameObject);
         return (
             <div>
                 <Dialog
@@ -37,21 +41,16 @@ class LoginConfirmation extends Component {
                     aria-describedby="alert-dialog-slide-description"
                 >
                     <DialogTitle id="alert-dialog-slide-title">
-                        {"Use Google's location service?"}
+                        {nameObject ? `Hey there, ${nameObject.fullName}.` : ''}
                     </DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description">
-                            Let Google help apps determine location. This means
-                            sending anonymous location data to Google, even when
-                            no apps are running.
+                            {greeting}
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary">
-                            Disagree
-                        </Button>
-                        <Button onClick={this.handleClose} color="primary">
-                            Agree
+                            SignOut
                         </Button>
                     </DialogActions>
                 </Dialog>
@@ -62,6 +61,8 @@ class LoginConfirmation extends Component {
 
 const mapStateToProps = state => ({
     dialogue: state.login.dialogue,
+    greeting: state.login.greeting,
+    user: state.login.user,
 });
 
 export default connect(mapStateToProps)(LoginConfirmation);

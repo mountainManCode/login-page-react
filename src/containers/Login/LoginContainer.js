@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Login from './Login';
+import LoginConfirmation from '../../components/LoginConfirmation/LoginConfirmation';
 
 import {
     fetchEmail,
@@ -19,24 +20,7 @@ class LoginContainer extends Component {
         this.state = {
             email: '',
             password: '',
-            // profile: [],
         };
-    }
-    componentDidMount() {
-        // TODO: fetch JSON and attach state!
-        // const users = fetch(USERS_URL).then(r => r.json());
-        // Promise.all([users]).then(response => {
-        //     const [usersList] = response;
-        //     console.log(usersList);
-        //     //   const combined = List.map(item => {
-        //     //     item.itemowner = usersList.find(user => user.id === item.itemowner);
-        //     //     return item;
-        //     //   });
-        //     const profile = usersList.filter(user =>
-        //         user.email === 'bart@simpsons.com' && user.password === 'password');
-        //     console.log(profile);
-        //     this.setState({ profile });
-        // });
     }
 
     handleToggleDialogue = () => {
@@ -54,7 +38,9 @@ class LoginContainer extends Component {
         const userEmail = Object.values({ email }).toString();
         const userPassword = Object.values({ password }).toString();
 
-        this.props.dispatch(fetchUser(email, password));
+        this.props
+            .dispatch(fetchUser(email, password))
+            .then(this.props.dispatch(updateToggleDialogue()));
     };
     // handleEmail = email => {
     //     this.props.dispatch(fetchEmail(email));
@@ -74,17 +60,20 @@ class LoginContainer extends Component {
     // };
 
     render() {
-        // console.log(this.props);
+        // console.log(this.props.user);
         return (
-            <Login
-                dialogue={this.props.dialogue}
-                handleToggleDialogue={this.handleToggleDialogue}
-                handleEmail={this.handleEmail}
-                handleLogin={this.handleLogin}
-                handlePassword={this.handlePassword}
-                email={this.state.email}
-                password={this.state.password}
-            />
+            <div>
+                <Login
+                    dialogue={this.props.dialogue}
+                    handleToggleDialogue={this.handleToggleDialogue}
+                    handleEmail={this.handleEmail}
+                    handleLogin={this.handleLogin}
+                    handlePassword={this.handlePassword}
+                    email={this.state.email}
+                    password={this.state.password}
+                />
+                {this.props.user ? <LoginConfirmation /> : null}
+            </div>
         );
     }
 }
@@ -93,7 +82,7 @@ const mapStateToProps = state => ({
     dialogue: state.login.dialogue,
     email: state.login.email,
     password: state.login.password,
-    user: state.login.profile,
+    user: state.login.user,
 });
 
 export default connect(mapStateToProps)(LoginContainer);
