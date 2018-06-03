@@ -110,7 +110,15 @@ const Login = props => {
 };
 
 Login.propTypes = {
+    children: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
+    email: PropTypes.string.isRequired,
+    error: PropTypes.string.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    handleEmail: PropTypes.func.isRequired,
+    handleLogin: PropTypes.func.isRequired,
+    handlePassword: PropTypes.func.isRequired,
+    password: PropTypes.string.isRequired,
 };
 
 export default compose(withStyles(styles), withWidth())(Login);

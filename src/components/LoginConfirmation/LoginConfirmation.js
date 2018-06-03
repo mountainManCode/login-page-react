@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
+import compose from 'recompose/compose';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide, withMobileDialog } from '@material-ui/core/';
 
 import { fetchGreeting, updateToggleDialogue } from '../../redux/modules/login';
 
@@ -24,7 +19,9 @@ class LoginConfirmation extends Component {
     };
 
     render() {
-        const { dialogue, greeting, user } = this.props;
+        const {
+            dialogue, greeting, user, fullScreen
+        } = this.props;
 
         const userName = user.find(value => value.fullName);
 
@@ -32,17 +29,18 @@ class LoginConfirmation extends Component {
             <div>
                 <Dialog
                     open={this.props.dialogue === true}
+                    fullScreen={fullScreen}
                     TransitionComponent={Transition}
                     keepMounted
                     onClose={this.handleClose}
-                    aria-labelledby="alert-dialog-slide-title"
-                    aria-describedby="alert-dialog-slide-description"
+                    aria-labelledby="dialog-slide-user"
+                    aria-describedby="dialog-slide-greeting"
                 >
-                    <DialogTitle id="alert-dialog-slide-title">
+                    <DialogTitle id="dialog-slide-user">
                         {userName ? `Hey there, ${userName.fullName}.` : ''}
                     </DialogTitle>
                     <DialogContent>
-                        <DialogContentText id="alert-dialog-slide-description">
+                        <DialogContentText id="dialog-slide-greeting">
                             {greeting}
                         </DialogContentText>
                     </DialogContent>
@@ -63,4 +61,4 @@ const mapStateToProps = state => ({
     user: state.login.user,
 });
 
-export default connect(mapStateToProps)(LoginConfirmation);
+export default compose(connect(mapStateToProps), withMobileDialog())(LoginConfirmation);

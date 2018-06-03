@@ -7,7 +7,6 @@ const styles = theme => ({
         width: '100%',
     },
     inputFocused: {
-        backgroundColor: '#FFF',
         fontSize: 16,
         width: 'calc(100% - 24px)',
         transition: theme.transitions.create(['background-color']),
@@ -20,14 +19,6 @@ const styles = theme => ({
         margin: '0 5px',
         padding: '0 5px',
     },
-    fieldStyle: {
-        width: '50%',
-    },
-    // errorStyle: {
-    //     color: 'red',
-    //     position: 'absolute',
-    //     bottom: '-0.42rem',
-    // },
     underlineStyle: {
         display: 'none',
     },

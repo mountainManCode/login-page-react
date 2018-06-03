@@ -1,10 +1,21 @@
-const styles = {
+const styles = theme => ({
     paper: {
-        borderRadius: 10,
-        width: '50%',
-        maxWidth: '600px',
-        minWidth: '300px',
         minHeight: '300px',
+        [theme.breakpoints.up('md')]: {
+            borderRadius: 10,
+            width: '50%',
+            maxWidth: '600px',
+            minWidth: '200px',
+        },
+        [theme.breakpoints.up('sm')]: {
+            borderRadius: 10,
+            width: '66%',
+            maxWidth: '500px',
+        },
+        [theme.breakpoints.only('xs')]: {
+            width: '100%',
+            borderRadius: 0,
+        },
     },
     loginTitleWrapper: {
         display: 'flex',
@@ -17,13 +28,11 @@ const styles = {
     form: {
         display: 'flex',
         'flex-flow': 'column nowrap',
-        // 'justify-content': 'space-between',
         padding: '5% 10%',
         minHeight: '250px',
         width: '100%',
     },
     formControl: {
-        // border: 2px solid #000;
         alignSelf: 'center',
     },
     button: {
@@ -41,6 +50,9 @@ const styles = {
         minWidth: '150px',
         padding: '0 30px',
         boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .30)',
+        '&:hover': {
+            backgroundColor: '#00FFFF',
+        },
     },
     buttonResetPassword: {
         color: '#666699',
@@ -59,11 +71,12 @@ const styles = {
         minHeight: '0px',
     },
     registerWrapper: {
-        display: 'inline-flex',
+        display: 'flex',
+        'flex-flow': 'row wrap',
         fontSize: 16,
         padding: '0',
         margin: '0',
     },
-};
+});
 
 export default styles;

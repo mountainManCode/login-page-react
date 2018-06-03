@@ -40,7 +40,6 @@ class LoginContainer extends Component {
 
     render() {
         return (
-            // <div>
             <Login
                 dialogue={this.props.dialogue}
                 error={this.props.error}
@@ -52,13 +51,15 @@ class LoginContainer extends Component {
                 password={this.state.password}
                 user={this.props.user}
             />
-            // </div>
         );
     }
 }
 
 LoginContainer.propTypes = {
+    dialogue: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
+    error: PropTypes.string.isRequired,
+    user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
