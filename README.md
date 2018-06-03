@@ -4,7 +4,7 @@ A simple login page using React library.
 
 login: bart@simpsons.com password: password
 
-<img src="./Login.gif" width="600" height="300">
+<img src="./Login.gif">
 
 ## Installation
 
