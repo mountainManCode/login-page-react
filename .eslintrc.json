@@ -1,7 +1,6 @@
 {
   "extends": "airbnb",
   "parser": "babel-eslint",
-  // "es6": true,
   "env": {
     "browser": true
   },
@@ -14,7 +13,6 @@
     "no-case-declarations": 0,
     "no-param-reassign": 0,
     "no-unused-vars": 0,
-    // "prop-types": [1],
     "react/prefer-stateless-function": 1,
     "react/jsx-no-bind": 0,
     "react/jsx-filename-extension": 0,

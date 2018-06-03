@@ -1,100 +1,116 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import compose from 'recompose/compose';
 import {
     Button,
     FormControl,
     FormLabel,
+    IconButton,
     InputLabel,
     Paper,
+    Typography,
+    withWidth,
 } from '@material-ui/core/';
 import { withStyles } from '@material-ui/core/styles';
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faLock from '@fortawesome/fontawesome-free-solid/faLock';
 import faUser from '@fortawesome/fontawesome-free-solid/faUser';
+import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
 
 import ValidatedTextField from '../../components/ValidatedTextField/';
 import LoginConfirmation from '../../components/LoginConfirmation/';
-import '../../styles/css/login.css';
+import styles from './styles';
 
-const styles = {
-    button: {
-        background: '#008080',
-        borderRadius: 25,
-        border: 0,
-        color: 'white',
-        fontFamily: 'sans-serif',
-        textTransform: 'uppercase',
-        letterSpacing: '1px',
-        height: 48,
-        width: '33%',
-        minWidth: '150px',
-        padding: '0 30px',
-        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .30)',
-    },
+const Login = props => {
+    const {
+        email,
+        error,
+        handleChange,
+        handleEmail,
+        handleLogin,
+        handlePassword,
+        password,
+    } = props;
+    const {
+        button,
+        buttonRegister,
+        buttonResetPassword,
+        form,
+        formControl,
+        loginContainer,
+        loginTitleWrapper,
+        paper,
+        registerWrapper,
+        textField,
+    } = props.classes;
 
-    loginField: {
-        border: '1px solid yellow',
-        borderRadius: 10,
-        backgroundColor: '#FFFFFF',
-    },
-};
-// handleChange={this.props.handleEmail}
-
-const Login = props => (
-    <div className="login-container">
-        <Paper zDepth={5}>
+    return (
+        <Paper elevation={4} className={paper}>
             <form
-                className="login__form-container"
+                className={form}
                 autoComplete="off"
                 onSubmit={e => {
                     e.preventDefault();
-                    props.handleLogin();
+                    handleLogin();
                 }}
             >
-                <FormControl fullWidth>
-                    <div className="login__form__input-wrapper">
-                        <ValidatedTextField
-                            handleChange={props.handleEmail}
-                            inputIcon={faUser}
-                            label="Email"
-                            type="email"
-                            value={props.email}
-                            className="login__text-input"
-                        />
-                    </div>
-                    {/* <ValidatedTextField
+                <div className={loginTitleWrapper}>
+                    <Typography variant="headline">Log In</Typography>
+                    <IconButton>
+                        <FontAwesomeIcon icon={faTimes} />
+                    </IconButton>
+                </div>
+                <FormControl className={formControl} fullWidth>
+                    <ValidatedTextField
+                        autoFocus
+                        className={textField}
+                        handleChange={handleEmail}
                         inputIcon={faUser}
                         label="Email"
                         type="email"
-                        className="login__text-input"
-                    /> */}
+                        value={email}
+                    />
                 </FormControl>
-                <FormControl fullWidth>
-                    <div className="login__form__input-wrapper">
-                        <ValidatedTextField
-                            handleChange={props.handlePassword}
-                            inputIcon={faLock}
-                            label="Password"
-                            type="password"
-                            value={props.password}
-                        />
-                    </div>
+
+                <FormControl className={formControl} fullWidth>
+                    <ValidatedTextField
+                        autoFocus={false}
+                        className={textField}
+                        handleChange={handlePassword}
+                        inputIcon={faLock}
+                        label="Password"
+                        type="password"
+                        value={password}
+                    />
                 </FormControl>
-                {/* <Button
-                    className="login__button"
-                    primary
-                    variant="raised"
-                    type="submit"
-                >
-                    Enter
-                </Button> */}
-                <Button className={props.classes.button} type="submit">
+
+                <Typography color="error">{error}</Typography>
+
+                <Button className={button} type="submit">
                     {props.children ? props.children : 'Log In'}
                 </Button>
+                <div>
+                    <Button size="small" className={buttonResetPassword}>
+                        Forgot Password
+                    </Button>
+                </div>
+                <div className={registerWrapper}>
+                    <Typography variant="subheading">
+                        Don't have an account? You can
+                    </Typography>
+                    <Button size="small" className={buttonRegister}>
+                        register now.
+                    </Button>
+                </div>
             </form>
+            {props.user ? <LoginConfirmation /> : null}
         </Paper>
-    </div>
-);
-// onClick={props.handleToggleDialogue}
+    );
+};
 
-export default withStyles(styles)(Login);
+Login.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default compose(withStyles(styles), withWidth())(Login);

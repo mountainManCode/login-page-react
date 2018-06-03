@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import '../../styles/css/headerBar.css';
+import { Typography } from '@material-ui/core/';
+import { withStyles } from '@material-ui/core/styles';
 
-class HeaderBar extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+import styles from './styles';
 
-    render() {
-        return (
-            <div>
-                <h1 className="headerBar-title">Acme Services</h1>
-            </div>
-        );
-    }
-}
-export default HeaderBar;
+const HeaderBar = props => {
+    const { headerBarTitle, title } = props.classes;
+
+    return <Typography className={headerBarTitle}>Acme Services</Typography>;
+};
+
+export default withStyles(styles)(HeaderBar);

@@ -1,8 +1,7 @@
 {
   "messages": [
     {
-      "greeting": "Welcome",
-      "greeting2": "You have logged in!"
+      "greeting": "Welcome, You have logged in!"
     }
   ],
   "users": [

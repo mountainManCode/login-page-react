@@ -1,7 +1,6 @@
 // ACTIONS
 const GET_EMAIL = 'GET_EMAIL';
 const GET_PASSWORD = 'GET_PASSWORD';
-
 const GET_LOADING = 'GET_LOADING';
 const GET_PROFILE = 'GET_PROFILE';
 const GET_PROFILE_ERROR = 'GET_PROFILE_ERROR';
@@ -73,9 +72,12 @@ export const fetchGreeting = () => dispatch => {
 
     return Promise.all([messages]).then(response => {
         const [messagesList] = response;
+
         const loginGreeting = messagesList.find(message =>
-            message);
+            message.greeting);
         const welcome = Object.values(loginGreeting).toString();
+        // console.log(welcome);
+
         dispatch(getGreeting(welcome));
     });
 };
@@ -90,7 +92,9 @@ export const fetchUser = (email, password) => dispatch => {
         const profile = usersList.filter(user =>
             user.email === email && user.password === password);
         dispatch(getProfile(profile));
-        // if (profile.length > 0) { dispatch(toggleDialogue()); }
+        if (profile.length > 0) {
+            dispatch(toggleDialogue());
+        } else { dispatch(getProfileError('Please enter correct email and password.')); }
     })
         .catch(error => dispatch(getProfileError(error)));
 };
@@ -106,7 +110,7 @@ export default (
         dialogue: false,
         email: '',
         error: '',
-        greeting: '',
+        greeting: [],
         password: '',
         user: [],
     },

@@ -8,28 +8,26 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 
-import { fetchGreeting } from '../../redux/modules/login';
+import { fetchGreeting, updateToggleDialogue } from '../../redux/modules/login';
 
 function Transition(props) {
     return <Slide direction="up" {...props} />;
 }
 
 class LoginConfirmation extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-
     async componentDidMount() {
         await this.props.dispatch(fetchGreeting());
     }
 
+    handleSignOut = () => {
+        this.props.dispatch(updateToggleDialogue());
+    };
+
     render() {
         const { dialogue, greeting, user } = this.props;
 
-        const nameObject = user.find(value => value.fullName);
-        // const userName = Object.values(nameObject).toString();
-        console.log(nameObject);
+        const userName = user.find(value => value.fullName);
+
         return (
             <div>
                 <Dialog
@@ -41,7 +39,7 @@ class LoginConfirmation extends Component {
                     aria-describedby="alert-dialog-slide-description"
                 >
                     <DialogTitle id="alert-dialog-slide-title">
-                        {nameObject ? `Hey there, ${nameObject.fullName}.` : ''}
+                        {userName ? `Hey there, ${userName.fullName}.` : ''}
                     </DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description">
@@ -49,7 +47,7 @@ class LoginConfirmation extends Component {
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.handleSignOut} color="primary">
                             SignOut
                         </Button>
                     </DialogActions>
