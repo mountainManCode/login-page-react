@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide, withMobileDialog } from '@material-ui/core/';
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    Slide,
+    withMobileDialog,
+} from '@material-ui/core/';
 
 import { fetchGreeting, updateToggleDialogue } from '../../redux/modules/login';
 
@@ -19,9 +29,7 @@ class LoginConfirmation extends Component {
     };
 
     render() {
-        const {
-            dialogue, greeting, user, fullScreen
-        } = this.props;
+        const { greeting, user, fullScreen } = this.props;
 
         const userName = user.find(value => value.fullName);
 
@@ -60,5 +68,13 @@ const mapStateToProps = state => ({
     greeting: state.login.greeting,
     user: state.login.user,
 });
+
+LoginConfirmation.propTypes = {
+    dialogue: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    greeting: PropTypes.string.isRequired,
+    user: PropTypes.array.isRequired,
+    fullScreen: PropTypes.bool.isRequired,
+};
 
 export default compose(connect(mapStateToProps), withMobileDialog())(LoginConfirmation);

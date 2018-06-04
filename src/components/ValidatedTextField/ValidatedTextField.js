@@ -1,28 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    Input,
-    InputAdornment,
-    InputLabel,
-    FormControl,
-    TextField,
-} from '@material-ui/core';
+import { InputAdornment, TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import styles from './styles';
 
 const ValidatedTextField = props => {
     const {
-        autoFocus,
-        handleChange,
-        inputIcon,
-        id,
-        label,
-        type,
-        value,
-        className,
+        autoFocus, handleChange, inputIcon, label, type, value
     } = props;
-    const { errorStyle, inputFocused, textField } = props.classes;
+    const { inputFocused, textField } = props.classes;
 
     return (
         <div>
@@ -30,7 +17,6 @@ const ValidatedTextField = props => {
                 autoFocus={autoFocus}
                 className={textField}
                 error
-                errorStyle={errorStyle}
                 id={type}
                 InputProps={{
                     disableUnderline: true,
@@ -46,7 +32,7 @@ const ValidatedTextField = props => {
                 margin="normal"
                 onChange={handleChange}
                 placeholder={label}
-                underlineStyle={{ display: 'none' }}
+                underlinestyle={{ display: 'none' }}
                 type={type || 'text'}
                 value={value}
             />
@@ -55,7 +41,13 @@ const ValidatedTextField = props => {
 };
 
 ValidatedTextField.propTypes = {
+    autoFocus: PropTypes.bool.isRequired,
+    classes: PropTypes.object.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    inputIcon: PropTypes.object.isRequired,
     label: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(ValidatedTextField);

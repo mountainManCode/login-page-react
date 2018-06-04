@@ -4,9 +4,7 @@ import compose from 'recompose/compose';
 import {
     Button,
     FormControl,
-    FormLabel,
     IconButton,
-    InputLabel,
     Paper,
     Typography,
     withWidth,
@@ -26,7 +24,6 @@ const Login = props => {
     const {
         email,
         error,
-        handleChange,
         handleEmail,
         handleLogin,
         handlePassword,
@@ -38,7 +35,6 @@ const Login = props => {
         buttonResetPassword,
         form,
         formControl,
-        loginContainer,
         loginTitleWrapper,
         paper,
         registerWrapper,
@@ -76,7 +72,6 @@ const Login = props => {
                 <FormControl className={formControl} fullWidth>
                     <ValidatedTextField
                         autoFocus={false}
-                        className={textField}
                         handleChange={handlePassword}
                         inputIcon={faLock}
                         label="Password"
@@ -110,15 +105,15 @@ const Login = props => {
 };
 
 Login.propTypes = {
-    children: PropTypes.object.isRequired,
+    children: PropTypes.object,
     classes: PropTypes.object.isRequired,
     email: PropTypes.string.isRequired,
     error: PropTypes.string.isRequired,
-    handleChange: PropTypes.func.isRequired,
     handleEmail: PropTypes.func.isRequired,
     handleLogin: PropTypes.func.isRequired,
     handlePassword: PropTypes.func.isRequired,
     password: PropTypes.string.isRequired,
+    user: PropTypes.array.isRequired,
 };
 
 export default compose(withStyles(styles), withWidth())(Login);

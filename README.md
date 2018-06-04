@@ -16,13 +16,13 @@ npm install
 
 ## Start-up
 
-From inside the directory, run:
+Start up the client inside the directory, run:
 
 ```bash
 npm run start
 ```
 
-&&
+&& Start up the Json-server inside the client directory:
 
 ```bash
 npm run json-server

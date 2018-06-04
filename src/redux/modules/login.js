@@ -76,7 +76,6 @@ export const fetchGreeting = () => dispatch => {
         const loginGreeting = messagesList.find(message =>
             message.greeting);
         const welcome = Object.values(loginGreeting).toString();
-        // console.log(welcome);
 
         dispatch(getGreeting(welcome));
     });
@@ -110,7 +109,7 @@ export default (
         dialogue: false,
         email: '',
         error: '',
-        greeting: [],
+        greeting: '',
         password: '',
         user: [],
     },

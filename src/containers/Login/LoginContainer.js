@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Login from './Login';
-import LoginConfirmation from '../../components/LoginConfirmation/LoginConfirmation';
 
-import {
-    fetchEmail,
-    fetchPassword,
-    fetchUser,
-    updateToggleDialogue,
-} from '../../redux/modules/login';
+import { fetchUser, updateToggleDialogue } from '../../redux/modules/login';
 
 class LoginContainer extends Component {
     constructor(props) {
@@ -28,11 +22,7 @@ class LoginContainer extends Component {
     };
     handleLogin = () => {
         const { email, password } = this.state;
-        const userEmail = Object.values({ email }).toString();
-        const userPassword = Object.values({ password }).toString();
-
         this.props.dispatch(fetchUser(email, password));
-        // .then(this.props.dispatch(updateToggleDialogue()));
     };
     handleToggleDialogue = () => {
         this.props.dispatch(updateToggleDialogue());
@@ -59,7 +49,7 @@ LoginContainer.propTypes = {
     dialogue: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
     error: PropTypes.string.isRequired,
-    user: PropTypes.object.isRequired,
+    user: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = state => ({
