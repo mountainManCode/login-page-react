@@ -1,39 +1,19 @@
 {
-  "messages": [
-    {
-      "greeting": "Welcome, You have logged in!"
-    }
-  ],
-  "users": [
+  "posts": [
     {
       "id": 1,
-      "fullName": "Homer Simpson",
-      "email": "homer@simpsons.com",
-      "password": "password"
-    },
-    {
-      "id": 2,
-      "fullName": "Marge Simpson",
-      "email": "marge@simpsons.com",
-      "password": "password"
-    },
-    {
-      "id": 3,
-      "fullName": "Bart Simpson",
-      "email": "bart@simpsons.com",
-      "password": "password"
-    },
-    {
-      "id": 4,
-      "fullName": "Lisa Simpson",
-      "email": "Lisa@simpsons.com",
-      "password": "password"
-    },
-    {
-      "id": 5,
-      "fullName": "Maggie Simpson",
-      "email": "maggie@simpsons.com",
-      "password": "password"
+      "title": "json-server",
+      "author": "typicode"
     }
-  ]
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
 }

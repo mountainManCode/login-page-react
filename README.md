@@ -22,7 +22,7 @@ Start up the client inside the directory, run:
 npm run start
 ```
 
-&& Start up the Json-server inside the client directory:
+&& Start up the Json-server inside the directory:
 
 ```bash
 npm run json-server
